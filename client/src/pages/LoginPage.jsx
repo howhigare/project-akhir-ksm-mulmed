@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./LoginPage.css";
-// Ganti path import di bawah sesuai lokasi file ini di project-mu.
-// Kalau LoginPage.jsx diletakkan di src/pages/, path ini sudah pas.
+import axios from "axios";
 import heroImage from "../assets/images/img1.jpg";
 
 const EyeIcon = ({ open }) => (
@@ -27,7 +26,7 @@ const ArrowIcon = () => (
   </svg>
 );
 
-export default function LoginPage() {
+export default function LoginPage({ onSuccess }) {
   const [role, setRole] = useState("kasir"); // "kasir" | "admin"
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({ identifier: "", password: "" });
@@ -37,26 +36,36 @@ export default function LoginPage() {
   const handleChange = (field) => (e) =>
     setForm((prev) => ({ ...prev, [field]: e.target.value }));
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-    try {
-      // TODO: sambungkan ke endpoint server-mu, contoh:
-      // const res = await fetch("/api/auth/login", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ ...form, role }),
-      // });
-      // if (!res.ok) throw new Error("Login gagal");
-      // const data = await res.json();
-      await new Promise((r) => setTimeout(r, 700)); // simulasi request
-    } catch (err) {
-      setError("Username atau kata sandi salah. Coba lagi.");
-    } finally {
-      setLoading(false);
-    }
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
+  setLoading(true);
+
+  try {
+    const { data } = await axios.post(
+      "http://localhost:5000/api/auth/login",
+      {
+        username: form.identifier,
+        password: form.password,
+        role,
+      }
+    );
+
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
+
+    // Kasih tahu App.jsx bahwa login berhasil
+    onSuccess(data.user.role);
+
+  } catch (err) {
+    setError(
+      err.response?.data?.message ||
+      "Username atau kata sandi salah. Coba lagi."
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="login-screen">
@@ -134,21 +143,20 @@ export default function LoginPage() {
             </button>
           </div>
 
+          <label className="field">
+            <span className="field__label">Username</span>
+            <input
+              type="text"
+              className="field__input"
+              placeholder="cth. admin atau kasir01"
+              value={form.identifier}
+              onChange={handleChange("identifier")}
+              autoComplete="username"
+              required
+            />
+          </label>
           <form className="login-form" onSubmit={handleSubmit}>
-            <label className="field">
-              <span className="field__label">
-                {role === "kasir" ? "Username" : "Email"}
-              </span>
-              <input
-                type="text"
-                className="field__input"
-                placeholder={role === "kasir" ? "cth. kasir01" : "cth. admin@toko.com"}
-                value={form.identifier}
-                onChange={handleChange("identifier")}
-                autoComplete="username"
-                required
-              />
-            </label>
+
 
             <label className="field">
               <span className="field__label">Kata Sandi</span>

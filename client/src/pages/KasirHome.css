@@ -1,0 +1,201 @@
+.page-head {
+  margin-bottom: 24px;
+}
+
+.page-head__title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  margin: 0 0 6px;
+}
+
+.page-head__subtitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13.5px;
+  margin: 0;
+}
+
+/* ---------- CTA ---------- */
+
+.cta-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  padding: 30px 34px;
+  cursor: pointer;
+  text-align: left;
+  margin-bottom: 24px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.cta-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 32px -12px rgba(26, 19, 16, 0.4);
+}
+
+.cta-card:active {
+  transform: translateY(0);
+}
+
+.cta-card__eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11.5px;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 8px;
+}
+
+.cta-card__title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  margin: 0 0 6px;
+}
+
+.cta-card__subtitle {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+}
+
+.cta-card__icon {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Summary cards ---------- */
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.summary-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.summary-card__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255, 0, 0, 0.08);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.summary-card__value {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  margin: 0;
+}
+
+.summary-card__label {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin: 2px 0 0;
+}
+
+/* ---------- Panel / history ---------- */
+
+.panel {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px 22px;
+}
+
+.panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.panel__title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0;
+}
+
+.panel__link {
+  border: none;
+  background: none;
+  color: var(--primary);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.history-list__item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--paper-dim);
+  font-size: 13.5px;
+}
+
+.history-list__item:last-child {
+  border-bottom: none;
+}
+
+.mono {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12.5px;
+}
+
+.muted-text {
+  color: var(--muted);
+}
+
+.history-list__total {
+  font-weight: 600;
+}
+
+@media (max-width: 560px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 26px;
+  }
+}
