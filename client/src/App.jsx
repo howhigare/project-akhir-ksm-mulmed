@@ -1,7 +1,18 @@
+import { useState } from 'react'
+import LoginPage from './pages/LoginPage'
+
 export default function App() {
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [role, setRole] = useState(null)
+
+  if (!loggedIn) {
+    return <LoginPage onSuccess={(r) => { setRole(r); setLoggedIn(true) }} />
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-100">
-      <h1 className="text-4xl font-bold text-blue-600">Tailwind jalan!</h1>
+    <div style={{ padding: 32 }}>
+      <p>Role dipilih: {role}</p>
+      <button onClick={() => setLoggedIn(false)}>Kembali</button>
     </div>
   )
 }
